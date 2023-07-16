@@ -1,16 +1,24 @@
-// eslint-disable-next-line no-unused-vars
+import { useState } from "react";
 import Header from "./components/header";
+// import FeedbackItem from "./components/FeedbackItem";
+import FeedbackList from "./components/FeedbackList";
+import FeedbackStats from "./components/FeedbackStats";
+import FeedbackData from "./Data/FeedbackData";
 
 function App() {
-  const body = "My App";
-  
- 
+const [feedback, setFeedback] = useState(FeedbackData)
+const deteleFeedback = (id)=>{
+    if(window.confirm("Are you sure you want to")){
+        setFeedback(feedback.filter((item) => item.id !== id))
+    }
+}
   return (
     <>
-    <Header/>
-    <div className="container">
-      <h1>{body.toUpperCase()}</h1>
-    </div>
+      <Header />
+      <div className="container">
+        <FeedbackStats feedback={feedback}/>
+       <FeedbackList feedback={feedback} handleDelete = {deteleFeedback}/>
+      </div>
     </>
   );
 }
